@@ -24,9 +24,13 @@ namespace WebApplication2.Controllers
             }
 
             var differences = Enumerable.Range(0, Math.Max(compareStringsRequest.FirstString.Length, compareStringsRequest.SecondString.Length))
-                .Where(i => i >= compareStringsRequest.FirstString.Length || i >= compareStringsRequest.SecondString.Length ||
-                                 compareStringsRequest.FirstString[i] != compareStringsRequest.SecondString[i])
-                .Select(i => $"{compareStringsRequest.FirstString.ElementAtOrDefault(i)} {compareStringsRequest.SecondString.ElementAtOrDefault(i)}");
+                .Where(i => i >= compareStringsRequest.FirstString.Length
+                         || i >= compareStringsRequest.SecondString.Length
+                         || compareStringsRequest.FirstString[i] != compareStringsRequest.SecondString[i])
+                .Select
+                (
+                  i => $"{compareStringsRequest.FirstString.ElementAtOrDefault(i)} {compareStringsRequest.SecondString.ElementAtOrDefault(i)}"
+                );
 
             return Ok(string.Join(Environment.NewLine, differences));
         }
